@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"strings"
 
+	log "github.com/sirupsen/logrus"
+
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclparse"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
@@ -143,6 +145,7 @@ func attemptEvaluateLocals(
 		terragruntOptions.Logger.Errorf("Could not convert evaluated locals to the execution context to evaluate additional locals")
 		return nil, evaluatedLocals, false, err
 	}
+	log.Infof("vendor CreateTerragruntEvalContext:%+v\n", terragruntOptions)
 	evalCtx, err := CreateTerragruntEvalContext(
 		filename,
 		terragruntOptions,
